@@ -6,6 +6,8 @@
         class="list-group-item list-group-item-action active w-25 m-1"
         v-for="item in items"
         :key="item"
+        v-on:click="loadData(item)"
+       
       >{{item}}</a>
     </div>
   </div>
@@ -40,7 +42,7 @@ export default {
         }
       })
         .then(response => {
-        //   console.log(response);
+          // console.log(response);
           response.data["drinks"].forEach(element => {
             this.items.push(element.strCategory);
             //   console.log(element.strCategory);
@@ -49,6 +51,10 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+
+    loadData(item){
+      console.log(item);
     }
   }
 };

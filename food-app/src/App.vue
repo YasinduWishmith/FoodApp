@@ -1,23 +1,23 @@
 <template>
 <div>
   <NavBar/>
-  <div><CategoryList/></div>
-   <div><DrinkItems/></div>
+  <!-- <Home/> -->
+  <!-- <router-view></router-view> -->
+  <!-- <div><CategoryList/></div>
+   <div><DrinkItems/></div> -->
    
 </div>
 
 </template>
 
 <script>
-import CategoryList from './components/CategoriesHome'
-import DrinkItems from './components/DrinkItems'
+import Home from './components/Home'
 
 export default {
 
   name: 'app',
   components: {
-    CategoryList,
-    DrinkItems
+    Home,
   },
   data() {
     return {

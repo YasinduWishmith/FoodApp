@@ -1,17 +1,25 @@
 <template>
-    <div>
-        helloooooooo
+  <div>
+    <div class="card mb-3" id="cardouter" v-for="(glass,index) in glasses" :key="index">
+      <h5 class="card-header" id="header">{{glass.strDrink}}</h5>
+      <div class="card-body"></div>
+      <img
+        style="height: 200px; width: 100%; display: block;"
+        :src=glass.strDrinkThumb
+        alt="Card image"
+      />
     </div>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   name: "DrinkItems",
   data() {
     return {
-      items: []
+      glasses: []
     };
   },
   beforeMount() {
@@ -34,7 +42,10 @@ export default {
         }
       })
         .then(response => {
-          console.log(response);
+          // console.log(response);
+          response.data["drinks"].forEach(element => {
+            this.glasses.push(element);
+          });
         })
         .catch(error => {
           console.log(error);
@@ -45,4 +56,10 @@ export default {
 </script>
 
 <style>
+#cardouter {
+  width: 200px;
+}
+#header{
+  background-color:rgb(32, 145, 116)
+}
 </style>
