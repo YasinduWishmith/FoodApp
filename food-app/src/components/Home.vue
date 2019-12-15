@@ -3,10 +3,9 @@
     <div class="list">
       <CategoryList />
     </div>
-    <div class="items">
+    <div class="items" v-if="true">
       <DrinkItems />
     </div>
-    hellloooooooooo
   </div>
 </template>
 
@@ -24,4 +23,16 @@ export default {
 </script>
 
 <style>
+.Base{
+  width: 100%;
+}
+.list{
+  width: 30%;
+  float: left
+}
+.items{
+  width: 70%;
+  float: right;
+}
+
 </style>

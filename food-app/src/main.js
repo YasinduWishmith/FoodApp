@@ -3,13 +3,11 @@ import App from './App.vue'
 import NavBar from './components/NavBar'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import VueRouter from 'vue-router'
-// import DrinkItems from './components/DrinkItems'
-import Home from './components/Home.vue';
-// import CategoryHome from './components/CategoryHome'
+import Router from './routes.js'
+import { LayoutPlugin } from 'bootstrap-vue'
 
+Vue.use(LayoutPlugin)
 
-Vue.use(VueRouter)
 
 Vue.use(VueAxios, axios)
 
@@ -18,15 +16,7 @@ Vue.config.productionTip = false
 Vue.component('NavBar',NavBar);
 
 new Vue({
+  
   render: h => h(App),
-  router,
+  router: Router,
 }).$mount('#app')
-
-
-const routes=[
-  {path: './home',component:Home}
-];
-
-const router = new VueRouter({
-  routes
-});

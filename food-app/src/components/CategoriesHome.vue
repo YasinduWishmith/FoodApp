@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="list-group">
+    <div class="list-group" id="MainCategory">
       <a
+        id="SubCategory"
         href="#"
         class="list-group-item list-group-item-action active w-25 m-1"
         v-for="item in items"
         :key="item"
         v-on:click="loadData(item)"
-       
       >{{item}}</a>
     </div>
   </div>
@@ -15,12 +15,14 @@
 
 <script>
 import axios from "axios";
+import {EventBus} from '../EventBus'
 
 export default {
   name: "CategoryList",
   data() {
     return {
-      items: []
+      items: [],
+      aItem: ""
     };
   },
   beforeMount() {
@@ -55,10 +57,19 @@ export default {
 
     loadData(item){
       console.log(item);
+      EventBus.$emit('itemName',item);
     }
   }
 };
 </script>
 
 <style>
+#MainCategory{
+ width: 100%; 
+}
+#SubCategory{
+  width: 100%;
+  min-inline-size: -webkit-fill-available;
+  border-radius: 10px;
+}
 </style>

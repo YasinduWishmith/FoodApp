@@ -2,7 +2,7 @@
 <div>
   <NavBar/>
   <!-- <Home/> -->
-  <!-- <router-view></router-view> -->
+<router-view></router-view>
   <!-- <div><CategoryList/></div>
    <div><DrinkItems/></div> -->
    
@@ -11,13 +11,12 @@
 </template>
 
 <script>
-import Home from './components/Home'
+// import Home from './components/Home'
 
 export default {
 
   name: 'app',
   components: {
-    Home,
   },
   data() {
     return {
