@@ -6,18 +6,23 @@
     <div class="items" v-if="true">
       <DrinkItems />
     </div>
+    <div v-if="true">
+     <DetailsOfDrink/>
+    </div>
   </div>
 </template>
 
 <script>
 import CategoryList from "./CategoriesHome";
 import DrinkItems from "./DrinkItems";
+import DetailsOfDrink from "./DetailsOfDrikns";
 
 export default {
     name : 'Home',
   components: {
     CategoryList,
-    DrinkItems
+    DrinkItems,
+    DetailsOfDrink
   }
 };
 </script>

@@ -22,10 +22,12 @@ export default {
   data() {
     return {
       items: [],
-      aItem: ""
+      aItem: "",
+      backgroundColor:"none"
     };
   },
   beforeMount() {
+  
     this.getCatList();
   },
   methods: {
@@ -72,4 +74,5 @@ export default {
   min-inline-size: -webkit-fill-available;
   border-radius: 10px;
 }
+
 </style>

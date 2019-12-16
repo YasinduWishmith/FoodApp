@@ -1,18 +1,18 @@
 <template>
   <b-container fluid>
-<div class="row">
-   <div class="card col-3 itemcard"  v-for="(glass,index) in glasses" :key="index">
-     <div class="card title">
-      <h5 class="card-header" id="header">{{glass.strDrink}}</h5>
-     </div>
-      <img
-        style="height: 200px; width: 100%; display: block;"
-        :src="glass.strDrinkThumb"
-        alt="Card image"
-      />
-      
+    <div class="row">
+      <div class="card col-3 itemcard hovereffect" v-for="(glass,index) in glasses" :key="index">
+        <div class="card title">
+          <h5 class="card-header" id="header" v-on:click="loadDetails(glass)">{{glass.strDrink}}</h5>
+        </div>
+        <img
+          class="img-responsive"
+          style="height: 200px; width: 100%; display: block;"
+          :src="glass.strDrinkThumb"
+          alt="Card image"
+        />
+      </div>
     </div>
-</div>
   </b-container>
 </template>
 
@@ -25,25 +25,29 @@ export default {
   data() {
     return {
       glasses: [],
-      itemName: ""
+      itemName: "",
+      Ordinary_Drink: "Ordinary Drink"
     };
   },
   beforeMount() {
+    this.getItemListInitialy();
     this.getItemName();
-    // this.getItemList();
   },
   methods: {
+    loadDetails(glass){
+      // console.log(glass.idDrink);
+      EventBus.$emit('getId',glass.idDrink);
+    },
     getItemName() {
       EventBus.$on("itemName", aItem => {
         this.itemName = aItem;
         console.log(this.itemName);
-        
+
         this.getItemList(this.itemName);
 
         EventBus.$off("itemName", aItem);
       });
     },
-
 
     getItemList(key) {
       const axios = require("axios");
@@ -68,29 +72,171 @@ export default {
           response.data["drinks"].forEach(element => {
             this.glasses.push(element);
           });
-            console.log(this.glasses);
+          console.log(this.glasses);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+
+    getItemListInitialy() {
+      const axios = require("axios");
+
+      axios({
+        method: "GET",
+        url: "https://the-cocktail-db.p.rapidapi.com/filter.php",
+        headers: {
+          "content-type": "application/octet-stream",
+          "x-rapidapi-host": "the-cocktail-db.p.rapidapi.com",
+          "x-rapidapi-key": "7eb7cb0097msh13df13840eefc10p1c7773jsn226625744505"
+        },
+
+        params: {
+          c: "" + this.Ordinary_Drink + ""
+        }
+      })
+        .then(response => {
+          // console.log(response);
+          this.glasses = [];
+          response.data["drinks"].forEach(element => {
+            this.glasses.push(element);
+          });
+          console.log(this.glasses);
         })
         .catch(error => {
           console.log(error);
         });
     }
-    // this.clear();
-  },
-
+  }
 };
 </script>
 
 <style>
-/* #cardouter {
+#cardouter {
   width: 200px;
-} */
+}
 #header {
-  background-color: rgb(32, 145, 116);
+  background-color: transparent;
+  font-weight: 1000;
+  z-index: 10000;
+  color:floralwhite;
+  /* overflow: hidden; */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+
 }
 .card.col-3.itemcard {
-   padding-left: 8px; 
-   padding-right: 8px; 
-    margin-bottom: 20px;
- 
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-bottom: 20px;
+}
+
+.hovereffect {
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  cursor: default;
+}
+
+.hovereffect .overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.hovereffect:hover .overlay {
+  background-color: rgba(170, 170, 170, 0.4);
+}
+
+.hovereffect h2,
+.hovereffect img {
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+
+}
+
+.hovereffect:hover img {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+      opacity: 0.2;
+  filter: alpha(opacity=50);
+}
+
+.hovereffect h5 {
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  font-size: 17px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hovereffect a.info {
+  display: inline-block;
+  text-decoration: none;
+  padding: 7px 14px;
+  text-transform: uppercase;
+  color: #fff;
+  border: 1px solid #fff;
+  margin: 50px 0 0 0;
+  background-color: transparent;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  font-weight: normal;
+  height: 85%;
+  width: 85%;
+  position: absolute;
+  top: -20%;
+  left: 8%;
+  padding: 70px;
+
+}
+
+.hovereffect:hover a.info {
+  opacity: 0.5;
+  filter: alpha(opacity=100);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.card {
+  flex-direction: row-reverse;
+}
+h5{
+/* text-align:center; */
+  /* left: 50%; */
+  /* transform: translateX(-70%);
+  transform: translateY(50%); */
+  z-index: 1000;
+
+}
+h5:hover {
+  text-decoration: underline; 
 }
 </style>
