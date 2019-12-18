@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="list-group" id="MainCategory">
+    <div class="list-group" id="MainCategory"> 
       <a
         id="SubCategory"
         href="#"

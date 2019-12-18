@@ -17,7 +17,8 @@ Vue.config.productionTip = false
 Vue.component('NavBar',NavBar);
 
 new Vue({
-  
   render: h => h(App),
   router: Router,
 }).$mount('#app')
+
+

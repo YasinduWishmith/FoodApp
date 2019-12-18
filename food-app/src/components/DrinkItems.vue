@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid>
+  <b-container fluid v-bind:class="BlureObj">
     <div class="row">
       <div class="card col-3 itemcard hovereffect" v-for="(glass,index) in glasses" :key="index">
         <div class="card title">
@@ -22,11 +22,22 @@ import { EventBus } from "../EventBus";
 
 export default {
   name: "DrinkItems",
+
+  computed: {
+    BlureObj(){
+      return{
+        active: this.isActive && !this.error,
+      'text-danger': this.error && this.error.type === 'fatal'
+      }
+    }
+  },
   data() {
     return {
       glasses: [],
       itemName: "",
-      Ordinary_Drink: "Ordinary Drink"
+      Ordinary_Drink: "Ordinary Drink",
+      itemId: "",
+      isActive: true
     };
   },
   beforeMount() {
@@ -35,8 +46,10 @@ export default {
   },
   methods: {
     loadDetails(glass){
-      // console.log(glass.idDrink);
-      EventBus.$emit('getId',glass.idDrink);
+       
+      this.itemId = glass.idDrink;
+      console.log(this.itemId);
+      EventBus.$emit('getId', this.itemId);
     },
     getItemName() {
       EventBus.$on("itemName", aItem => {
@@ -106,6 +119,9 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    blurFunct(){
+      event.target.blur();
     }
   }
 };
@@ -118,7 +134,7 @@ export default {
 #header {
   background-color: transparent;
   font-weight: 1000;
-  z-index: 10000;
+  z-index: 5;
   color:floralwhite;
   /* overflow: hidden; */
   margin-left: auto;
@@ -233,10 +249,29 @@ h5{
   /* left: 50%; */
   /* transform: translateX(-70%);
   transform: translateY(50%); */
-  z-index: 1000;
+  z-index: 50;
 
 }
 h5:hover {
   text-decoration: underline; 
 }
+
+.blur   {
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+}
+#overlay    {
+    position: fixed;
+    display: none;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background: rgba(255,255,255,.8);
+    z-index: 999;
+}
+
 </style>
