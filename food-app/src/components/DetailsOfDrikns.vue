@@ -1,7 +1,7 @@
 <template>
   <div class="outer" v-if="show">
-    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-      <div class="card-header"><h3>{{drink}}</h3></div>
+    <div class="card text-white bg-primary mb-3" style="max-width: 800rem;">
+      <div class="card-header"><h4>{{drink}}</h4></div>
       <div class="card-body">
         <h6 class="card-title">{{drinkCategory}} Category</h6>
         <p
@@ -150,12 +150,14 @@ h6 {
 .outer{
 position: absolute;
     z-index: 100;
-    margin-left: 50%;
+      margin-left: 30%;
     margin-top: 10%;
+    margin-right: 30%;
 } 
 .footer{
   margin-top: 15px;
   z-index: 150;
+  margin-right: 30%;
 }
 button{
    z-index: 150;
