@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid v-bind:class="BlureObj">
+  <b-container fluid v-bind:class="{blurFunct:this.blur}">
     <div class="row">
       <div class="card col-3 itemcard hovereffect" v-for="(glass,index) in glasses" :key="index">
         <div class="card title">
@@ -13,47 +13,57 @@
         />
       </div>
     </div>
+    <h1 style="z-index:100">{{this.count}}</h1>
   </b-container>
 </template>
 
 <script>
 import { EventBus } from "../EventBus";
+import { Observable } from 'rxjs/Observable'
+import 'rxjs/add/observable/interval'
 
 export default {
   name: "DrinkItems",
 
-  computed: {
-    BlureObj(){
-      return{
-        active: this.isActive && !this.error,
-      'text-danger': this.error && this.error.type === 'fatal'
-      }
-    }
-  },
   data() {
     return {
       glasses: [],
       itemName: "",
       Ordinary_Drink: "Ordinary Drink",
       itemId: "",
-      isActive: true
+      isActive: true,
+      blur:false,
+      count:0
     };
+  },
+
+  created(){
+    const obs = Observable.interval(100)
+    obs.subscribe(
+      (value) => {
+        this.count = value
+        EventBus.$on("blurFalse", blur=>{
+          this.blur = blur
+        });
+      }
+    )
   },
   beforeMount() {
     this.getItemListInitialy();
     this.getItemName();
   },
   methods: {
+    makeblur(){
+      this.blur = true;
+    },
     loadDetails(glass){
-       
       this.itemId = glass.idDrink;
-      console.log(this.itemId);
       EventBus.$emit('getId', this.itemId);
+        this.makeblur();
     },
     getItemName() {
       EventBus.$on("itemName", aItem => {
         this.itemName = aItem;
-        console.log(this.itemName);
 
         this.getItemList(this.itemName);
 
@@ -63,7 +73,6 @@ export default {
 
     getItemList(key) {
       const axios = require("axios");
-      console.log(key);
 
       axios({
         method: "GET",
@@ -272,6 +281,9 @@ h5.card-header:hover {
     bottom: 0px;
     background: rgba(255,255,255,.8);
     z-index: 999;
+}
+.blurFunct{
+  filter: blur(8px);
 }
 
 </style>

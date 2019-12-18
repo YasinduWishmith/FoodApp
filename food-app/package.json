@@ -16,6 +16,8 @@
     "express": "^4.17.1",
     "fx-layout-vue": "^1.1.0",
     "mdbvue": "^6.1.1",
+    "rxjs": "^6.5.3",
+    "rxjs-compat": "^6.5.3",
     "serve-static": "^1.14.1",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.5",

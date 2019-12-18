@@ -1,9 +1,9 @@
 <template>
   <div class="outer" v-if="show">
     <div class="card text-white bg-primary mb-3" style="max-width: 800rem;">
-      <div class="card-header"><h4>{{drink}}</h4></div>
+      <div class="card-header"><h4>{{drinkCategory}}</h4></div>
       <div class="card-body">
-        <h6 class="card-title">{{drinkCategory}} Category</h6>
+        <h6 class="card-title"> {{drink}} Category</h6>
         <p
           class="card-text"
         >It's looks like a {{drinkGlass}}. It is {{drinkAlcoholic}}. It should {{drinkInstruction}}</p>
@@ -30,7 +30,8 @@ export default {
       drink: "",
       itemId: "",
       show: false,
-      boxclose: true
+      blur:false
+  
     };
  
   },
@@ -46,8 +47,8 @@ export default {
         this.getDetails(this.itemId);
         console.log(this.itemId);
         EventBus.$off("getId", itemId);
-        
       });
+
     },
 
     getDetails(key) {
@@ -100,6 +101,8 @@ export default {
     close(){
       this.show=false;
       this.clear();
+      EventBus.$emit('blurFalse', this.blur);
+      
     }
   }
 };
