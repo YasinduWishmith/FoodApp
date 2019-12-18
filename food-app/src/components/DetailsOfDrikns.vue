@@ -32,12 +32,10 @@ export default {
       show: false,
       boxclose: true
     };
-    //
-    //
+ 
   },
 
   mounted() {
-    // this.getDetails(this.itemId);
     this.getItemId();
   },
   methods: {
@@ -51,12 +49,6 @@ export default {
         
       });
     },
-
-    // isEmpty(){
-    //    if(this.drinkCategory !==""){
-    //         this.show = true;
-    //    }
-    // },
 
     getDetails(key) {
       

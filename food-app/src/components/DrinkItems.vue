@@ -17,7 +17,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import { EventBus } from "../EventBus";
 
 export default {
@@ -80,7 +79,6 @@ export default {
         }
       })
         .then(response => {
-          // console.log(response);
           this.glasses = [];
           response.data["drinks"].forEach(element => {
             this.glasses.push(element);
@@ -109,7 +107,6 @@ export default {
         }
       })
         .then(response => {
-          // console.log(response);
           this.glasses = [];
           response.data["drinks"].forEach(element => {
             this.glasses.push(element);
@@ -136,7 +133,6 @@ export default {
   font-weight: 1000;
   z-index: 5;
   color:floralwhite;
-  /* overflow: hidden; */
   margin-left: auto;
   margin-right: auto;
   margin-top: auto;
@@ -245,10 +241,6 @@ export default {
   flex-direction: row-reverse;
 }
 h5{
-/* text-align:center; */
-  /* left: 50%; */
-  /* transform: translateX(-70%);
-  transform: translateY(50%); */
   z-index: 50;
 
 }
