@@ -129,14 +129,17 @@ export default {
   width: 200px;
 }
 #header {
-  background-color: transparent;
-  font-weight: 1000;
-  z-index: 5;
-  color:floralwhite;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
+     background-color: transparent;
+    font-weight: 1000;
+    z-index: 5;
+    color: floralwhite;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 150px;
+    padding-right: 60px;
+    padding-top: 100px;
+   
 
 }
 .card.col-3.itemcard {
@@ -174,6 +177,8 @@ export default {
 .hovereffect img {
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
+      margin-left: 5px;
+    margin-right: 20px;
 }
 
 .hovereffect img {
@@ -240,12 +245,15 @@ export default {
 .card {
   flex-direction: row-reverse;
 }
-h5{
+h5.card-header{
   z-index: 50;
+ font-size: 13px;
 
 }
-h5:hover {
-  text-decoration: underline; 
+h5.card-header:hover {
+  text-decoration: underline;
+  font-size: 14px;
+  color: aquamarine;
 }
 
 .blur   {
